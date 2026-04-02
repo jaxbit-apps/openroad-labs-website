@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenRoad Labs LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#111;
+  --paper:#f5f3ef;
+  --mid:#8a8780;
+  --faint:#ddd9d1;
+  --tint:#e8e5de;
+  --pop:#c44a2c;
+  --pop-hover:#a83d24;
+  --white:#fff;
+}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{
+  font-family:'Geist',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:99;
+  background:rgba(245,243,239,0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+nav.scrolled{border-bottom-color:var(--faint)}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 40px;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+}
+.wordmark{
+  font-family:'Instrument Serif',serif;
+  font-size:1.35rem;font-weight:400;
+  text-decoration:none;color:var(--ink);
+  letter-spacing:-0.02em;
+}
+.wordmark strong{font-weight:400;color:var(--pop)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--mid);font-size:.85rem;
+  font-weight:500;letter-spacing:.01em;transition:color .2s;
+}
+.nav-links a:hover{color:var(--ink)}
+
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.menu-btn svg{width:24px;height:24px;stroke:var(--ink);stroke-width:1.5;fill:none}
+
+/* ── HERO ── */
+.hero{
+  max-width:1200px;margin:0 auto;
+  padding:160px 40px 80px;
+}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.8rem,6vw,5.2rem);
+  font-weight:400;line-height:1.05;
+  letter-spacing:-0.035em;
+  max-width:800px;
+}
+.hero h1 i{font-style:italic;color:var(--pop)}
+.hero-sub{
+  margin-top:28px;
+  font-size:1.05rem;line-height:1.7;
+  color:var(--mid);max-width:520px;
+}
+.hero-actions{
+  margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:12px 24px;border-radius:100px;
+  font-size:.9rem;font-weight:600;
+  text-decoration:none;transition:all .2s;
+  cursor:pointer;border:none;font-family:inherit;
+}
+.pill-dark{background:var(--ink);color:var(--paper)}
+.pill-dark:hover{background:#333}
+.pill-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--faint)}
+.pill-ghost:hover{border-color:var(--ink)}
+
+/* ── DIVIDER ── */
+.divider{max-width:1200px;margin:0 auto;padding:0 40px}
+.divider-line{height:1px;background:var(--faint)}
+
+/* ── METRICS ── */
+.metrics{
+  max-width:1200px;margin:0 auto;
+  padding:64px 40px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.metric{padding:0 24px;border-right:1px solid var(--faint)}
+.metric:first-child{padding-left:0}
+.metric:last-child{border-right:none;padding-right:0}
+.metric-val{
+  font-family:'Instrument Serif',serif;
+  font-size:2.8rem;font-weight:400;
+  letter-spacing:-0.03em;line-height:1;margin-bottom:6px;
+}
+.metric-val .accent{color:var(--pop)}
+.metric-label{
+  font-size:.8rem;color:var(--mid);font-weight:500;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+
+/* ── SECTION ── */
+.section{max-width:1200px;margin:0 auto;padding:80px 40px}
+.section-tag{
+  font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:var(--pop);margin-bottom:16px;display:block;
+}
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:400;letter-spacing:-0.03em;
+  line-height:1.1;margin-bottom:20px;max-width:600px;
+}
+.section-desc{
+  font-size:1rem;color:var(--mid);
+  line-height:1.7;max-width:500px;margin-bottom:48px;
+}
+
+/* ── PILLARS ── */
+.pillars{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--faint);border-radius:12px;
+  overflow:hidden;background:var(--white);
+}
+.pillar{
+  padding:40px 32px;border-right:1px solid var(--faint);
+  transition:background .25s;
+}
+.pillar:last-child{border-right:none}
+.pillar:hover{background:var(--tint)}
+.pillar-num{
+  font-family:'Instrument Serif',serif;
+  font-size:2.4rem;color:var(--faint);
+  line-height:1;margin-bottom:20px;letter-spacing:-0.03em;
+}
+.pillar h3{font-size:1rem;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em}
+.pillar p{font-size:.9rem;color:var(--mid);line-height:1.7}
+
+/* ── PROJECTS ── */
+.projects{display:flex;flex-direction:column;gap:20px}
+.proj{
+  background:var(--white);border:1px solid var(--faint);
+  border-radius:12px;display:grid;
+  grid-template-columns:340px 1fr;
+  overflow:hidden;transition:box-shadow .3s,transform .2s;
+}
+.proj:hover{box-shadow:0 8px 40px rgba(0,0,0,.06);transform:translateY(-2px)}
+.proj-thumb{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  min-height:280px;
+}
+.proj-thumb-bg{position:absolute;inset:0;transition:transform .4s ease}
+.proj:hover .proj-thumb-bg{transform:scale(1.03)}
+.t1{background:#1a1a1a}
+.t2{background:#c44a2c}
+.t3{background:#2c3e50}
+.proj-thumb-label{
+  position:relative;z-index:1;
+  font-family:'Instrument Serif',serif;
+  font-size:2rem;color:rgba(255,255,255,.9);
+  letter-spacing:-0.03em;line-height:1.15;
+  padding:0 32px;text-align:center;
+}
+.proj-thumb-label small{
+  display:block;font-family:'Geist',sans-serif;
+  font-size:.65rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:rgba(255,255,255,.5);margin-bottom:8px;
+}
+.proj-body{padding:40px 36px;display:flex;flex-direction:column;justify-content:center}
+.proj-body h3{
+  font-family:'Instrument Serif',serif;
+  font-size:1.7rem;font-weight:400;
+  letter-spacing:-0.02em;margin-bottom:4px;
+}
+.proj-type{
+  font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--pop);margin-bottom:16px;
+}
+.proj-body p{
+  font-size:.92rem;color:var(--mid);
+  line-height:1.75;margin-bottom:20px;max-width:440px;
+}
+.proj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.proj-tag{
+  font-size:.72rem;font-weight:600;padding:4px 10px;
+  border-radius:4px;background:var(--tint);color:var(--mid);
+  letter-spacing:.02em;
+}
+.proj-link{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.85rem;font-weight:600;
+  color:var(--ink);text-decoration:none;
+  border-bottom:1.5px solid var(--faint);
+  padding-bottom:2px;transition:border-color .2s;width:fit-content;
+}
+.proj-link:hover{border-color:var(--ink)}
+.proj-link svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contact-info h3{
+  font-family:'Instrument Serif',serif;
+  font-size:1.8rem;font-weight:400;
+  letter-spacing:-0.02em;margin-bottom:16px;
+}
+.contact-info p{font-size:.95rem;color:var(--mid);line-height:1.7;margin-bottom:24px}
+.contact-detail{font-size:.9rem;color:var(--ink);margin-bottom:8px;font-weight:500}
+.contact-detail span{color:var(--mid);font-weight:400}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-form input,.contact-form textarea{
+  width:100%;padding:14px 16px;border:1.5px solid var(--faint);
+  border-radius:8px;font-family:inherit;font-size:.9rem;
+  background:var(--white);color:var(--ink);outline:none;transition:border-color .2s;
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#c4c0b8}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--ink)}
+.contact-form textarea{resize:vertical;min-height:110px}
+
+/* ── FOOTER ── */
+footer{
+  max-width:1200px;margin:0 auto;padding:48px 40px;
+  border-top:1px solid var(--faint);
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:16px;
+}
+.footer-left{font-size:.82rem;color:var(--mid)}
+.footer-left a{color:var(--mid);text-decoration:none}
+.footer-left a:hover{color:var(--ink)}
+.footer-right{
+  font-family:'Instrument Serif',serif;
+  font-size:1rem;color:var(--faint);letter-spacing:-0.02em;
+}
+
+/* ── REVEALS ── */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav-inner{padding:0 24px}
+  .nav-links{display:none}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:64px;left:0;right:0;
+    background:rgba(245,243,239,0.97);
+    backdrop-filter:blur(20px);padding:24px;gap:18px;
+    border-bottom:1px solid var(--faint);
+  }
+  .menu-btn{display:block}
+  .hero{padding:130px 24px 60px}
+  .metrics{grid-template-columns:repeat(2,1fr);gap:24px}
+  .metric{border-right:none;padding:0}
+  .section{padding:60px 24px}
+  .pillars{grid-template-columns:1fr}
+  .pillar{border-right:none;border-bottom:1px solid var(--faint)}
+  .pillar:last-child{border-bottom:none}
+  .proj{grid-template-columns:1fr}
+  .proj-thumb{min-height:200px}
+  .proj-body{padding:28px 24px}
+  .contact-grid{grid-template-columns:1fr;gap:40px}
+  .input-row{grid-template-columns:1fr}
+  .divider{padding:0 24px}
+  footer{padding:36px 24px}
+}
+@media(max-width:500px){
+  .hero h1{font-size:2.2rem}
+  .metrics{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="wordmark">OpenRoad <strong>Labs</strong></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div data-reveal>
+    <h1>Building tools for<br><i>ALPR transparency</i><br>in America.</h1>
+    <p class="hero-sub">OpenRoad Labs researches automated license plate reader networks and develops privacy-first tools that give people visibility into — and control over — roadside surveillance.</p>
+    <div class="hero-actions">
+      <a href="#work" class="pill pill-dark">See our work ↓</a>
+      <a href="#contact" class="pill pill-ghost">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="metrics" data-reveal>
+  <div class="metric">
+    <div class="metric-val">3</div>
+    <div class="metric-label">Products shipped</div>
+  </div>
+  <div class="metric">
+    <div class="metric-val"><span class="accent">1st</span>
+    </div>
+    <div class="metric-label">ALPR commute router</div>
+  </div>
+  <div class="metric">
+    <div class="metric-val">50</div>
+    <div class="metric-label">States covered</div>
+  </div>
+  <div class="metric">
+    <div class="metric-val">24/7</div>
+    <div class="metric-label">Data monitoring</div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section" id="about">
+  <span class="section-tag" data-reveal>What we do</span>
+  <h2 class="section-title" data-reveal>Research. Build. Educate.</h2>
+  <p class="section-desc" data-reveal>We operate at the intersection of privacy advocacy and practical technology — turning opaque surveillance infrastructure into public knowledge and usable tools.</p>
+  <div class="pillars" data-reveal>
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <h3>Research</h3>
+      <p>Investigating the deployment, reach, and impact of ALPR systems across the country. Collecting data. Mapping networks. Publishing findings.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <h3>Solutions</h3>
+      <p>Shipping real products — from interactive maps to mobile routing apps — that give people practical ways to understand and minimize surveillance exposure.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <h3>Awareness</h3>
+      <p>Creating educational resources, guides, and data visualizations that make ALPR information accessible to journalists, activists, and everyday drivers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <span class="section-tag" data-reveal>Portfolio</span>
+  <h2 class="section-title" data-reveal>What we've built.</h2>
+  <p class="section-desc" data-reveal>Three products, one mission: making roadside surveillance visible and navigable.</p>
+
+  <div class="projects">
+    <div class="proj" data-reveal>
+      <div class="proj-thumb">
+        <div class="proj-thumb-bg t1"></div>
+        <div class="proj-thumb-label">
+          <small>01 / Platform</small>
+          DontGet<br>Flocked
+        </div>
+      </div>
+      <div class="proj-body">
+        <h3>DontGetFlocked.com</h3>
+        <div class="proj-type">Educational Platform &amp; Mapping Tool</div>
+        <p>The go-to resource for understanding ALPRs in the US. Features interactive maps, data breakdowns, and the first tool that analyzes how many ALPR cameras sit along your daily commute — with suggestions for alternative routes.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Education</span>
+          <span class="proj-tag">Mapping</span>
+          <span class="proj-tag">ALPR Data</span>
+          <span class="proj-tag">Route Analysis</span>
+        </div>
+        <a href="https://dontgetflocked.com" target="_blank" class="proj-link">
+          Visit site <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj" data-reveal>
+      <div class="proj-thumb">
+        <div class="proj-thumb-bg t2"></div>
+        <div class="proj-thumb-label">
+          <small>02 / Mobile App</small>
+          Flock<br>Hopper
+        </div>
+      </div>
+      <div class="proj-body">
+        <h3>FlockHopper</h3>
+        <div class="proj-type">Privacy-First Routing App</div>
+        <p>A mobile navigation app that routes you around ALPR cameras. Choose your destination, set your privacy tolerance, and FlockHopper calculates the path with the least surveillance exposure. No tracking. No data collection.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">iOS</span>
+          <span class="proj-tag">Navigation</span>
+          <span class="proj-tag">Privacy Routing</span>
+        </div>
+        <a href="#" class="proj-link">
+          Coming soon <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="proj" data-reveal>
+      <div class="proj-thumb">
+        <div class="proj-thumb-bg t3"></div>
+        <div class="proj-thumb-label">
+          <small>03 / Data Platform</small>
+          DeFlock<br>Maps
+        </div>
+      </div>
+      <div class="proj-body">
+        <h3>DeFlock Maps</h3>
+        <div class="proj-type">Interactive Research Maps</div>
+        <p>A rebuilt, high-performance mapping platform. Faster rendering, responsive interactions, and new data layers showing ALPR density, network ownership, and research findings — all explorable on a live map.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Interactive Maps</span>
+          <span class="proj-tag">Performance</span>
+          <span class="proj-tag">Data Visualization</span>
+        </div>
+        <a href="#" class="proj-link">
+          Explore maps <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info" data-reveal>
+      <span class="section-tag">Contact</span>
+      <h3>Let's talk.</h3>
+      <p>Whether you're a journalist, researcher, privacy advocate, or just someone who wants to know more — we'd like to hear from you.</p>
+      <div class="contact-detail">Email <span>— hello@openroadlabs.com</span></div>
+      <div class="contact-detail">Location <span>— United States</span></div>
+    </div>
+    <div class="contact-form" data-reveal>
+      <div class="input-row">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+      </div>
+      <input type="text" placeholder="Subject">
+      <textarea placeholder="Your message"></textarea>
+      <div>
+        <button class="pill pill-dark" onclick="alert('Thanks for reaching out — we\'ll be in touch.')">Send message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 OpenRoad Labs LLC &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a>
+  </div>
+  <div class="footer-right">OpenRoad Labs</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})
+},{threshold:.15});
+document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
+});
+</script>
+</body>
+</html>
