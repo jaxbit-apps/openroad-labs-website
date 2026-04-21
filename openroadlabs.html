@@ -235,6 +235,11 @@ nav.scrolled{border-bottom-color:var(--faint)}
 .contact-form input::placeholder,.contact-form textarea::placeholder{color:#c4c0b8}
 .contact-form input:focus,.contact-form textarea:focus{border-color:var(--ink)}
 .contact-form textarea{resize:vertical;min-height:110px}
+.contact-form .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-status{margin:0;min-height:1.2em;font-size:14px;color:var(--ink);opacity:0;transition:opacity .3s}
+.form-status.visible{opacity:1}
+.form-status.error{color:#b00020}
+.contact-form button[disabled]{opacity:.6;cursor:not-allowed}
 
 /* ── FOOTER ── */
 footer{
@@ -449,17 +454,20 @@ footer{
       <div class="contact-detail">Email <span>— flockhopper@proton.me</span></div>
       <div class="contact-detail">Address <span>— 30 N Gould St Ste R, Sheridan, WY 82801</span></div>
     </div>
-    <div class="contact-form" data-reveal>
+    <form class="contact-form" data-reveal name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hp-field"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="input-row">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
       </div>
-      <input type="text" placeholder="Subject">
-      <textarea placeholder="Your message"></textarea>
+      <input type="text" name="subject" placeholder="Subject">
+      <textarea name="message" placeholder="Your message" required></textarea>
       <div>
-        <button class="pill pill-dark" onclick="alert('Thanks for reaching out — we\'ll be in touch.')">Send message →</button>
+        <button type="submit" class="pill pill-dark">Send message →</button>
       </div>
-    </div>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -478,6 +486,33 @@ document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
 });
+
+const contactForm=document.getElementById('contact-form');
+const formStatus=document.getElementById('form-status');
+if(contactForm){
+  contactForm.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const btn=contactForm.querySelector('button[type="submit"]');
+    const data=new FormData(contactForm);
+    const body=new URLSearchParams();
+    for(const[k,v]of data.entries())body.append(k,v);
+    formStatus.classList.remove('error');
+    formStatus.classList.add('visible');
+    formStatus.textContent='Sending…';
+    btn.disabled=true;
+    try{
+      const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
+      if(!res.ok)throw new Error('Request failed');
+      contactForm.reset();
+      formStatus.textContent="Thanks for reaching out — we'll be in touch.";
+    }catch(err){
+      formStatus.classList.add('error');
+      formStatus.textContent='Something went wrong. Please email flockhopper@proton.me directly.';
+    }finally{
+      btn.disabled=false;
+    }
+  });
+}
 </script>
 </body>
 </html>
