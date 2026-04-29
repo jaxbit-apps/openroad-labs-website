@@ -456,7 +456,7 @@ footer{
     </div>
     <form class="contact-form" data-reveal name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
       <input type="hidden" name="form-name" value="contact">
-      <p class="hp-field"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <p class="hp-field" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="input-row">
         <input type="text" name="name" placeholder="Name" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -495,7 +495,10 @@ if(contactForm){
     const btn=contactForm.querySelector('button[type="submit"]');
     const data=new FormData(contactForm);
     const body=new URLSearchParams();
-    for(const[k,v]of data.entries())body.append(k,v);
+    for(const[k,v]of data.entries()){
+      if(k==='bot-field'&&!v)continue;
+      body.append(k,v);
+    }
     formStatus.classList.remove('error');
     formStatus.classList.add('visible');
     formStatus.textContent='Sending…';
