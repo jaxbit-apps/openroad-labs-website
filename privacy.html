@@ -3,44 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — OpenRoad Labs LLC</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#111;--paper:#f5f3ef;--mid:#8a8780;--faint:#ddd9d1;--pop:#c44a2c;--white:#fff}
-html{scroll-behavior:smooth;background:var(--paper)}
-body{font-family:'Geist',system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
-nav{position:fixed;top:0;width:100%;z-index:99;background:rgba(245,243,239,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--faint)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.wordmark{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;text-decoration:none;color:var(--ink);letter-spacing:-0.02em}
-.wordmark strong{font-weight:400;color:var(--pop)}
-.back-link{font-size:.85rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color .2s}
-.back-link:hover{color:var(--ink)}
-.content{max-width:760px;margin:0 auto;padding:140px 40px 80px}
-.content h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;letter-spacing:-0.03em;margin-bottom:8px}
-.content .updated{font-size:.85rem;color:var(--mid);margin-bottom:48px}
-.content h2{font-size:1.1rem;font-weight:700;margin:36px 0 12px;letter-spacing:-0.01em}
-.content p,.content ul{font-size:.95rem;color:var(--mid);line-height:1.8;margin-bottom:16px}
-.content ul{padding-left:20px}
-.content li{margin-bottom:8px}
-.content a{color:var(--pop);text-decoration:none}
-.content a:hover{text-decoration:underline}
-footer{max-width:760px;margin:0 auto;padding:48px 40px;border-top:1px solid var(--faint);font-size:.82rem;color:var(--mid)}
-footer a{color:var(--mid);text-decoration:none}
-footer a:hover{color:var(--ink)}
-@media(max-width:600px){.content{padding:120px 24px 60px}footer{padding:36px 24px}}
-</style>
+<title>Privacy Policy | OpenRoad Labs LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="openroadlabs.html" class="wordmark">OpenRoad <strong>Labs</strong></a>
-    <a href="openroadlabs.html" class="back-link">&larr; Back to home</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="openroadlabs.html" class="wordmark">
+      <span class="wordmark-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M7 21L10.5 3M17 21L13.5 3M12 7v2M12 12.5v2M12 18v2"/></svg>
+      </span>
+      OpenRoad Labs
+    </a>
+    <ul class="site-nav">
+      <li><a href="openroadlabs.html#about">About</a></li>
+      <li><a href="openroadlabs.html#projects">Projects</a></li>
+      <li><a href="openroadlabs.html#contact" class="btn btn-primary">Contact us</a></li>
+    </ul>
   </div>
-</nav>
+</header>
 
-<div class="content">
+<main class="wrap page">
   <h1>Privacy Policy</h1>
   <p class="updated">Last updated: April 2, 2026</p>
 
@@ -114,10 +101,41 @@ footer a:hover{color:var(--ink)}
     Sheridan, WY 82801<br>
     Email: <a href="mailto:flockhopper@proton.me">flockhopper@proton.me</a>
   </p>
-</div>
+</main>
 
-<footer>
-  &copy; 2026 OpenRoad Labs LLC &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="support.html">Support</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="openroadlabs.html" class="wordmark">
+          <span class="wordmark-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M7 21L10.5 3M17 21L13.5 3M12 7v2M12 12.5v2M12 18v2"/></svg>
+          </span>
+          OpenRoad Labs
+        </a>
+        <p>Maps and apps built on crowdsourced license plate reader data.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="openroadlabs.html#about">About</a></li>
+            <li><a href="openroadlabs.html#projects">Projects</a></li>
+            <li><a href="openroadlabs.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 OpenRoad Labs LLC</div>
+  </div>
 </footer>
 
 </body>
